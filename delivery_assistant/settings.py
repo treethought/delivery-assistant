@@ -15,7 +15,8 @@ class Config(object):
 
     # Flask-Assistant Integrations
     ASSIST_ACTIONS_ON_GOOGLE = True
-
+    CLIENT_ACCESS_TOKEN = 'YOUR API.AI AGENT CLIENT ACCESS TOKEN'
+    DEV_ACCESS_TOKEN = 'YOUR API.AI AGENT DEVELOPER ACCESS TOKEN'
 
 class ProdConfig(Config):
     """Production configuration."""

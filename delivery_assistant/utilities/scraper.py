@@ -20,6 +20,11 @@ class OrderScraper(object):
         self.login_url = 'http://d.mealclub.com/login.php'
         self._orders = []
 
+
+    def get_order_url(self, order_id):
+        return self._order_base + order_id
+
+
     @property
     def login_data(self):
         return {'username': self.username, 'password': self.password}
@@ -47,6 +52,7 @@ class OrderScraper(object):
             order_id, method = i.get_text().strip().split(' - ')
             ids.append(order_id)
         return ids
+
 
     @property
     def orders(self):
@@ -135,6 +141,7 @@ class OrderScraper(object):
 
     def _parse_order_info(self, order_id: str) -> Dict[str, str]:
         order_info = {}
+        order_info['OrderId'] = order_id  # scraped order# also has method
 
         soup = self._get_order_soup(order_id)
         overview = soup.select('#content > p')[0].get_text()
@@ -149,4 +156,3 @@ class OrderScraper(object):
         dish_data = self._parse_dish_info(tables[1])
         order_info.update(dish_data)
         return order_info
-

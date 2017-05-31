@@ -1,3 +1,4 @@
+import os
 import logging
 from typing import Dict, List
 from flask import Blueprint
@@ -41,6 +42,9 @@ def get_latest():
     order_items = get_order_items(data)
     resp = tell(speech).build_list()
     resp.include_items(order_items)
+
+    order_url = d.get_order_url(data['OrderId'])  # maybe move into scraper
+    resp.link_out('View Order', order_url)      # and add to the order dict
 
     return resp
 
